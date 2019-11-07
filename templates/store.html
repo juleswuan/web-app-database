@@ -1,20 +1,18 @@
 {% extends '_layout.html' %}
 
 {% block content %}
-<h1>Store</h1>
+<h1>Create a Store</h1>
 
 <!-- start Form component -->
 
 <form action="{{ url_for('create_new_store') }}" method="POST">
         <div class="form-group">
-          <label>Create a new store: </label>
+          <label for='name'>Enter new store name: </label>
           <input type='text' name='store_name' class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
 <!-- end Form component -->
-
-<!-- <p>Congratulations! {{ 'store_name' }} has been successfully created.</p> -->
 
 {% endblock %}

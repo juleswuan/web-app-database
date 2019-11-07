@@ -37,7 +37,6 @@ class Product(Base):
 
 
 if __name__ == "__main__":
-    db.init('inv_mgmt') #initialised db!
+    db.init('inv_mgmt')  # initialised db!
     db.connect()
     db.create_tables([Store, Warehouse, Product])
-

@@ -3,5 +3,13 @@
 {% block content %}
 <h1>Welcome!</h1>
 
-<a href="{{ url_for('store') }}" class='btn-btn-link'>Store</a>
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ url_for('store') }}">Store</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ url_for('warehouse') }}">Warehouse</a>
+    </li>
+</ul>
+
 {% endblock %}

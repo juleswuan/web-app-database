@@ -1,0 +1,25 @@
+{% extends '_layout.html' %}
+
+{% block content %}
+<h1>All Stores</h1>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Store Id</th>
+        <th scope="col">Store Name</th>
+        <th scope="col">Num. of Warehouses</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for store in stores %}
+        <tr>
+        <th scope="row">{{ store.id }}</th>
+        <td>{{ store.name }}</td>
+        <td>{{ store.num }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}

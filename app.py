@@ -57,6 +57,16 @@ def show_store(id):
     store = Store.get_by_id(id)
     return render_template('show.html', store=store)
 
+@app.route('/store/<id>/update', methods=['POST'])
+def update_store(id): 
+    s = Store.get_by_id(id)
+    s.name = request.form.get('name')
+    if s.save():
+        flash('Successfully updated!')
+    else:
+        flash('Error. Unable to update store')
+        return redirect(url_for('show_store'))
+
 
 @app.route('/warehouse/new', methods=['GET'])
 def warehouse():

@@ -25,7 +25,7 @@ class Store(Base):
 
 
 class Warehouse(Base):
-    store = pw.ForeignKeyField(Store, backref='warehouses', unique=True)
+    store = pw.ForeignKeyField(Store, backref='warehouses')
     location = pw.TextField()
 
 

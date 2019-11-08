@@ -1,3 +1,5 @@
+
+
 {% extends '_layout.html' %}
 
 {% block content %}
@@ -16,7 +18,7 @@
         <tr>
         <th scope="row">{{ store.id }}</th>
         <td>{{ store.name }}</td>
-        <td>{{ store.num }}</td>
+        <td>{{ store.warehouses.count() }}</td>
         </tr>
         {% endfor %}
     </tbody>

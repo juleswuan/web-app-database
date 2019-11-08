@@ -1,6 +1,8 @@
 import peeweedbevolve
 from flask import Flask, flash, render_template, request, redirect, url_for
 from models import db, Store, Warehouse
+from peewee import fn
+import logging
 
 app = Flask(__name__)
 app.secret_key = b"\xe3\x86\xc7\xe7\xf2\xfc'\xb0c\xda)\xfa\xfe%\x13\x8b"
@@ -42,10 +44,18 @@ def create_new_store():
         return render_template('store.html', name=request.form.get('store_name'))
 
 
-@app.route('/store_index', methods=['POST'])
-def store_index():
-    all_stores = Store.select() 
-    return render_template(store_index.html, all_stores=all_stores)
+@app.route('/stores', methods=['GET'])
+def stores():
+    # stores = Store.select(Store.id, Store.name, fn.Count(
+    #     Warehouse.id).alias('num')).join(Warehouse).group_by(Store.id).order_by(Store.id)
+    stores = Store.select()
+    return render_template('stores.html', stores=stores)
+
+
+@app.route('/store/<id>', methods=['GET'])
+def show_store(id):
+    store = Store.get_by_id(id)
+    return render_template('show.html', store=store)
 
 
 @app.route('/warehouse/new', methods=['GET'])

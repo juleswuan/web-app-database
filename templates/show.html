@@ -1,0 +1,12 @@
+{% extends '_layout.html' %}
+
+{% block content %}
+<h1>{{ store.name }}</h1>
+
+<p>Number of Warehouses</p>
+
+<p>{{ store.warehouses.count() }}</p>
+
+
+
+{% endblock %}

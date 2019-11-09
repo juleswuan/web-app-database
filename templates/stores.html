@@ -1,27 +1,28 @@
-
-
-{% extends '_layout.html' %}
-
-{% block content %}
+{% extends '_layout.html' %} {% block content %}
 <h1>All Stores</h1>
-<br>
+<br />
 <table class="table">
-    <thead>
-        <tr>
-        <th scope="col">Store Id</th>
-        <th scope="col">Store Name</th>
-        <th scope="col">Num. of Warehouses</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for store in stores %}
-        <tr>
-        <th scope="row">{{ store.id }}</th>
-        <td>{{ store.name }}</td>
-        <td>{{ store.warehouses.count() }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-    </table>
+  <thead>
+    <tr>
+      <th scope="col">Store Id</th>
+      <th scope="col">Store Name</th>
+      <th scope="col">Num. of Warehouses</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for store in stores %}
+    <tr>
+      <th scope="row">{{ store.id }}</th>
+      <td>{{ store.name }}</td>
+      <td>{{ store.warehouses.count() }}</td>
+      <td>
+        <form action="{{ url_for('delete_store', id=store.id) }}" method="POST">
+          <input type="submit" class="btn btn-warning" value="Delete" />
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}

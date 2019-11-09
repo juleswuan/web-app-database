@@ -41,7 +41,7 @@ def create_new_store():
         flash('New store successfully created!')
         return redirect(url_for('store'))
     else:
-        return render_template('store.html', name=request.form.get('store_name'))
+        return render_template('store.html', name=request.form.get('store_name'), errors=s.errors)
 
 
 @app.route('/stores', methods=['GET'])
@@ -57,15 +57,25 @@ def show_store(id):
     store = Store.get_by_id(id)
     return render_template('show.html', store=store)
 
+
 @app.route('/store/<id>/update', methods=['POST'])
 def update_store(id): 
+    # s = Store.get_by_id(id)
+    # s.name = request.form.get('name')
+    # if s.save():
+    #     flash('Successfully updated!')
+    # else:
+    #     flash('Error. Unable to update store')
+    #     return redirect(url_for('show_store'))
+    Store.set_by_id(id, {'name': request.form.get('name')})
+    return redirect(url_for('show_store', id=id))
+
+
+@app.route('/store/<id>/delete', methods=['POST'])
+def delete_store(id):
     s = Store.get_by_id(id)
-    s.name = request.form.get('name')
-    if s.save():
-        flash('Successfully updated!')
-    else:
-        flash('Error. Unable to update store')
-        return redirect(url_for('show_store'))
+    s.delete_instance()
+    return redirect(url_for('stores'))
 
 
 @app.route('/warehouse/new', methods=['GET'])

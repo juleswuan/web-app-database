@@ -12,8 +12,14 @@ class Base(pw.Model):
     updated_at = pw.DateTimeField(default=datetime.datetime.now)
 
     def save(self, *args, **kwargs):
-        self.updated_at = datetime.datetime.now()
-        return super(Base, self).save(*args, **kwargs)
+        self.errors = []
+        self.validate()
+
+        if len(self.errors) == 0:
+            self.updated_at = datetime.datetime.now()
+            return super(Base, self).save(*args, **kwargs)
+        else:
+            return 0
 
     class Meta:
         database = db
@@ -22,6 +28,12 @@ class Base(pw.Model):
 
 class Store(Base):
     name = pw.CharField(unique=True)
+
+    def validate(self):
+        duplicate_store = Store.get_or_none(Store.name == self.name)
+
+        if duplicate_store:
+            self.errors.append('Store name not unique')
 
 
 class Warehouse(Base):
